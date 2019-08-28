@@ -14,9 +14,9 @@ const sinLookupTable = {
   outputRange: [],
 }
 ;(function() {
+  const points = 100
   // For low points values (For example: 1k), milliseconds to populate are in the double digits.
   // But when using it, creating the interpolation will fire checkValidInputRange which can take hundreds of ms
-  const points = 100
   const multiplier = (Math.PI * 2) / points
   for (var x = 0; x < points; x++) {
     const key = x * multiplier
@@ -41,12 +41,16 @@ function abs(node) {
   })
 }
 
-function inverse(node) {
+function opposite(node) {
   return Animated.multiply(node, -1)
 }
 
 function subtract(node1, node2) {
-  return Animated.add(node1, inverse(node2))
+  return Animated.add(node1, opposite(node2))
+}
+
+function inverse(node) {
+  return Animated.divide(1, node)
 }
 
 export default {
@@ -55,6 +59,7 @@ export default {
   tan,
   pow,
   abs,
+  opposite,
   inverse,
   subtract,
 }
