@@ -15,8 +15,8 @@ const sinLookupTable = {
 }
 ;(function() {
   const points = 100
-  // For low points values (For example: 1k), milliseconds to populate are in the double digits.
-  // But when using it, creating the interpolation will fire checkValidInputRange which can take hundreds of ms
+  // If we wanted better precission, increasing `points` to for example 1k would take less than 100ms to initialize.
+  // However, when RN's Animated uses it, it would take hundreds of ms (due to `checkValidInputRange`) every time an animation is created with `Animated.timing` or similar
   const multiplier = (Math.PI * 2) / points
   for (var x = 0; x < points; x++) {
     const key = x * multiplier
